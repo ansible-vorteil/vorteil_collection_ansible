@@ -45,7 +45,7 @@ license:
 #dependencies: { toml , requests }
 
 # The URL of the originating SCM repository
-repository: https://github.com/ansible-vort/vorteil_collection_ansible
+repository: https://github.com/ansible-vorteil/vorteil_collection_ansible
 
 # The URL to any online docs
 documentation: https://support.vorteil.io/
