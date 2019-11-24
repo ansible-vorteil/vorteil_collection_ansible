@@ -10,7 +10,7 @@ This can be downloaded from here https://vorteil.io/
 
 Example Playbook
 ----------------
-
+```
 - name: List Vorteil Buckets & Apps
   hosts: localhost
 
@@ -38,6 +38,7 @@ Example Playbook
   - name: dump the apps response output
     debug:
       msg: '{{ apps }}'
+```
 
 License
 -------
