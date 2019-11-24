@@ -26,7 +26,7 @@ description:
     - Gets a list of all the provisioners configured within the Vorteil repo.
 
 extends_documentation_fragment:
-    - vorteil
+    - ansible_vorteil.cloud.vorteil
 
 author:
     - Jon Alfaro (@jalfvort)

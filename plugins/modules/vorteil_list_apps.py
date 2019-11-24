@@ -30,7 +30,7 @@ notes:
     - Please set your repo_key to login.
 
 extends_documentation_fragment:
-    - vorteil
+    - ansible_vorteil.cloud.vorteil
 
 author:
     - Wilhelm Wonigkeit (@bigwonig)

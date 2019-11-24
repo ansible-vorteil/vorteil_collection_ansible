@@ -26,8 +26,8 @@ description:
     - "Gets a list of all the applications within the Vorteil repo within a specific bucket"
 
 extends_documentation_fragment:
-    - vorteil
-    - vorteil.bucket
+    - ansible_vorteil.cloud.vorteil
+    - ansible_vorteil.cloud.vorteil.bucket
 
 author:
     - Wilhelm Wonigkeit (@bigwonig)

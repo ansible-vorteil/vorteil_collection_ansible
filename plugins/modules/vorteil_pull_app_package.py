@@ -27,9 +27,9 @@ description:
     Package will be saved to the hosts local machine."
 
 extends_documentation_fragment:
-    - vorteil
-    - vorteil.bucket
-    - vorteil.app
+    - ansible_vorteil.cloud.vorteil
+    - ansible_vorteil.cloud.vorteil.bucket
+    - ansible_vorteil.cloud.vorteil.app
 
 author:
     - Wilhelm Wonigkeit (@bigwonig)

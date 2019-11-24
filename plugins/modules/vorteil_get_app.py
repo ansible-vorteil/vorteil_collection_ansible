@@ -35,9 +35,9 @@ options:
         type: list
 
 extends_documentation_fragment:
-    - vorteil
-    - vorteil.bucket
-    - vorteil.app
+    - ansible_vorteil.cloud.vorteil
+    - ansible_vorteil.cloud.vorteil.bucket
+    - ansible_vorteil.cloud.vorteil.app
 author:
     - Wilhelm Wonigkeit (@bigwonig)
     - Jon Alfaro (@jalfvort)

@@ -49,7 +49,7 @@ options:
         type: dict
 
 extends_documentation_fragment:
-    - vorteil
+    - ansible_vorteil.cloud.vorteil
 
 author:
     - Jon Alfaro (@jalfvort)
