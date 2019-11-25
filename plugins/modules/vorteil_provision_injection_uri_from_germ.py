@@ -69,7 +69,6 @@ notes:
     - Vorteil.io repos that require permission will require a authentication key to login
     - Please set your repo_key to login.
     - This is a clone of the module vorteil_provision_injection_uri, but uses germs instead of bucket and app
-    - Documentation on germs: https://support.vorteil.io/docs/API-Reference/Scalars/GermString
 
 requirements: 
     - requests
