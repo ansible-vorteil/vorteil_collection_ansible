@@ -46,7 +46,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: print sample vcfg
-  vorteil_get_sample_vcfg:
+  ansible_vorteil.cloud.vorteil_get_sample_vcfg:
       format: "json"
 '''
 

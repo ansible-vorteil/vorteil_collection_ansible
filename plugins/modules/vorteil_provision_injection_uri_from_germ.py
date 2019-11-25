@@ -79,7 +79,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: provision the injection URI
-  vorteil_provision_injection_uri:
+  ansible_vorteil.cloud.vorteil_provision_injection_uri:
       repo_address: "{{ var_repo_address }}"
       repo_port: "{{ var_repo_port }}"
       repo_proto: "{{ var_repo_proto }}"

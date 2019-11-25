@@ -44,7 +44,7 @@ author:
 notes:
     - Vorteil.io repos that require permission will require a authentication key to login
     - Please set your repo_key to login.
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6
@@ -52,7 +52,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: Get the configuration for an application in the repo
-  vorteil_get_app:
+  ansible_vorteil.cloud.vorteil_get_app:
     repo_key: "{{ var_repo_key }}"
     repo_address: "{{ var_repo_address }}"
     repo_port : "{{ var_repo_port }}"

@@ -67,7 +67,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: insert the configuration into the injection URI
-  vorteil_create_injection_config:
+  ansible_vorteil.cloud.vorteil_create_injection_config:
     repo_key: "{{ var_repo_key }}"
     repo_address: "{{ var_repo_address }}"
     repo_port: "{{ var_repo_port }}"

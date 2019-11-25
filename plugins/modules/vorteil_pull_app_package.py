@@ -55,7 +55,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: Download vorteil app package
-  vorteil_pull_app_package:
+  ansible_vorteil.cloud.vorteil_pull_app_package:
     repo_key: "{{ var_repo_key }}"
     repo_address: "{{ var_repo_address }}"
     repo_port : "{{ var_repo_port }}"
@@ -68,10 +68,19 @@ EXAMPLES = r'''
 RETURN = r'''
 results:
     description:
-    - dict with the list of apps in the specific bucket in the Vorteil repository
+    - dict of the details of the downloadURL used to download the package and the save location.
     returned: success
     type: dict
     sample:
+        "bucket": {
+            "app": {
+                "latest": {
+                    "file": {
+                        "downloadURL": "URL"
+                }
+            }
+        },
+        "package_save_location": "/tmp/helloworld.vorteil"
 '''
 
 import traceback

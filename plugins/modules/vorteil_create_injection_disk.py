@@ -65,7 +65,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: get the disk from the injection URI
-  vorteil_create_injection_disk:
+  ansible_vorteil.cloud.vorteil_create_injection_disk:
     repo_key: "{{ var_repo_key }}"
     repo_address: "{{ var_repo_address }}"
     repo_port: "{{ var_repo_port }}"

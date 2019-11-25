@@ -44,7 +44,7 @@ requirements:
 EXAMPLES = r'''
 # List all of the provisioners in a Vorteil repository
 - name: List Vorteil repo provisioners
-  vorteil_list_provisioners:
+  ansible_vorteil.cloud.vorteil_list_provisioners:
       repo_address: "{{ var_repo_address }}"
       repo_port : "{{ var_repo_port }}"
       repo_proto : "{{ var_repo_proto }}"

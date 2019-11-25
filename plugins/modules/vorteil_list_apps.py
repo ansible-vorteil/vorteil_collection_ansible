@@ -44,7 +44,7 @@ requirements:
 
 EXAMPLES = r'''
 - name: List Vorteil repo apps
-  vorteil_list_apps:
+  ansible_vorteil.cloud.vorteil_list_apps:
     repo_key: '{{ var_repo_key }}'
     repo_address: '{{ var_repo_address }}'
     repo_port : "{{ var_repo_port }}"
