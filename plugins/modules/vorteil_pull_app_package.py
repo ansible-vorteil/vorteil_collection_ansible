@@ -20,7 +20,7 @@ module: vorteil_pull_app_package
 
 short_description: Pull a Vorteil app package from a Vorteil.io Repo
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - "Pull a Vorteil app package from a Vorteil.io Repo
@@ -47,7 +47,7 @@ options:
         required: true
         type: str
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6
@@ -72,15 +72,18 @@ results:
     returned: success
     type: dict
     sample:
-        "bucket": {
-            "app": {
-                "latest": {
-                    "file": {
-                        "downloadURL": "URL"
+        {
+            "bucket": {
+                    "app": {
+                        "latest": {
+                            "file": {
+                                "downloadURL": "URL"
+                        }
+                    }
                 }
-            }
-        },
-        "package_save_location": "/tmp/helloworld.vorteil"
+            },
+            "package_save_location": "/tmp/helloworld.vorteil"
+        }
 '''
 
 import traceback

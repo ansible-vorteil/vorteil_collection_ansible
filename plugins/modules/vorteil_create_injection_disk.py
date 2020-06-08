@@ -20,7 +20,7 @@ module: vorteil_create_injection_disk
 
 short_description: Create the actual disk and store to location or return location only
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Create the disk image or location of disk
@@ -57,7 +57,7 @@ author:
     - Wilhelm Wonigkeit (@bigwonig)
     - Jon Alfaro (@jalfvort)
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6

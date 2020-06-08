@@ -518,7 +518,7 @@ class VorteilClient(object):
 
         retresponse = response.json()['data']
 
-        if self.module.params['skip_injection'] == False:
+        if self.module.params['skip_injection'] is False:
             retresponse['provision']['uuid'] = repo_uuid
 
         if response.status_code != 200:
@@ -529,16 +529,16 @@ class VorteilClient(object):
             jobFinished = None
             jobResponse = None
             while jobFinished is None:
-                time.sleep( 1 )
-                jobParam = 'graphql?query=query{ job(id:"'+ retresponse['provision']['job']['id'] + '"){ progress { finished status } statusMessage } }'
+                time.sleep(1)
+                jobParam = 'graphql?query=query{ job(id:"' + retresponse['provision']['job']['id'] + '"){ progress { finished status } statusMessage } }'
                 jobURL = '{0}/{1}'.format(self.repo_url, jobParam)
                 jobResponse = requests.request("GET", jobURL, headers=headers, cookies=self.repo_cookie)
                 if 'errors' in jobResponse.json():
                     self.module.fail_json(msg="Vorteil.io Repo Response: " + jobResponse.json()['errors'][0]['message'])
                 jobFinished = jobResponse.json()['data']['job']['progress']['finished']
-            
+
             if jobResponse.json()['data']['job']['progress']['status'] == 'failed':
-                 self.module.fail_json(msg="Vorteil.io Repo Response: " + jobResponse.json()['data']['job']['statusMessage'])
+                self.module.fail_json(msg="Vorteil.io Repo Response: " + jobResponse.json()['data']['job']['statusMessage'])
 
         return retresponse, False
 

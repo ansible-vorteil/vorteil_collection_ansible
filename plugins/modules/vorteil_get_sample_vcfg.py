@@ -20,7 +20,7 @@ module: vorteil_get_sample_vcfg
 
 short_description: Prints a sample vcfg json configuration
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Prints a sample vcfg configuration.
@@ -38,7 +38,7 @@ options:
 author:
     - Jon Alfaro (@jalfvort)
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6
@@ -66,11 +66,12 @@ import traceback
 
 from ansible.module_utils.basic import AnsibleModule
 
+
 def main():
 
     # define available arguments/parameters a user can pass to the module
     module_args = dict(
-        format=dict(type='str', choices=['json','toml'], default='json')
+        format=dict(type='str', choices=['json', 'toml'], default='json')
     )
 
     module = AnsibleModule(
@@ -78,7 +79,7 @@ def main():
         supports_check_mode=True,
     )
 
-    jsonVCFG = { "json": """
+    jsonVCFG = {"json": """
     {
         "program": [
             {

@@ -20,7 +20,7 @@ module: vorteil_list_buckets
 
 short_description: List all of the buckets configured in the repository
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Gets a list of all the buckets within the Vorteil repo.

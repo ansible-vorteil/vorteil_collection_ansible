@@ -20,7 +20,7 @@ module: vorteil_provision_injection_config
 
 short_description: Create the actual configuration TOML for injection URI for provisioned disk
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Inject a configuration into the URI to be used for the provisioning disk building process
@@ -58,7 +58,7 @@ notes:
     - Vorteil.io repos that require permission will require a authentication key to login
     - Please set your repo_key to login.
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6

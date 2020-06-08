@@ -20,7 +20,7 @@ module: vorteil_provision_injection_uri_from_germ
 
 short_description: Create the configuration injection URI for the provsioning disk build from a germ.
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Create an injection URI to be used for the provisioning disk building process
@@ -64,13 +64,13 @@ extends_documentation_fragment:
 
 author:
     - Jon Alfaro (@jalfvort)
-    
+
 notes:
     - Vorteil.io repos that require permission will require a authentication key to login
     - Please set your repo_key to login.
     - This is a clone of the module vorteil_provision_injection_uri, but uses germs instead of bucket and app
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6

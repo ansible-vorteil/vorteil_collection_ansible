@@ -20,7 +20,7 @@ module: vorteil_list_apps
 
 short_description: List all of the applications in the repository
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Gets a list of all the applications within the Vorteil repo across all buckets
@@ -36,7 +36,7 @@ author:
     - Wilhelm Wonigkeit (@bigwonig)
     - Jon Alfaro (@jalfvort)
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6

@@ -24,7 +24,7 @@ description:
     - Configuration settings can be ['app', 'author', 'programs', 'cpus', 'description',
      'diskSize', 'kernel', 'memory', 'summary', 'totalNICs', 'url', 'version']
     - If no configuration parameters are passed, all are returned
-version_added: "2.10"
+version_added: "2.10.0"
 options:
     repo_app_attr:
         description:
@@ -33,6 +33,7 @@ options:
              'diskSize', 'kernel', 'memory', 'summary', 'totalNICs', 'url', 'version'].
         required: false
         type: list
+        elements: str
 
 extends_documentation_fragment:
     - ansible_vorteil.cloud.vorteil
@@ -117,7 +118,7 @@ def main():
         repo_port=dict(type='str', required=False),
         repo_bucket=dict(type='str', required=True),
         repo_app=dict(type='str', required=True),
-        repo_app_attr=dict(type='list', required=False)
+        repo_app_attr=dict(type='list', elements='str', required=False)
     )
 
     module = AnsibleModule(

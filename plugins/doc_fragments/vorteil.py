@@ -28,7 +28,7 @@ options:
         choices: ['http', 'https']
         default: 'http'
         type: str
-        required: true
+        required: false
     repo_port:
         description:
             - Admin port on which the repository is configured to listen (default 7472)

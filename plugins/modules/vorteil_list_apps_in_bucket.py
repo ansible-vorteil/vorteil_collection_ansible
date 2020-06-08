@@ -20,7 +20,7 @@ module: vorteil_list_apps_in_bucket
 
 short_description: List all of the applications in a specific bucket in the repository
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - "Gets a list of all the applications within the Vorteil repo within a specific bucket"
@@ -37,7 +37,7 @@ notes:
     - Vorteil.io repos that require permission will require a authentication key to login
     - Please set your repo_key to login.
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6

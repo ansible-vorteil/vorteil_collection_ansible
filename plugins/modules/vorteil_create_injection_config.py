@@ -20,7 +20,7 @@ module: vorteil_create_injection_config
 
 short_description: Create the actual configuration TOML for injection URI for disk build
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Inject a configuration into the URI to be used for disk building process.
@@ -59,7 +59,7 @@ author:
     - Wilhelm Wonigkeit (@bigwonig)
     - Jon Alfaro (@jalfvort)
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6

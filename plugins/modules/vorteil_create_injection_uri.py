@@ -20,7 +20,7 @@ module: vorteil_create_injection_uri
 
 short_description: Create the configuration injection URI for disk build
 
-version_added: "2.10"
+version_added: "2.10.0"
 
 description:
     - Create an injection URI to be used for disk building process
@@ -51,7 +51,7 @@ author:
     - Wilhelm Wonigkeit (@bigwonig)
     - Jon Alfaro (@jalfvort)
 
-requirements: 
+requirements:
     - requests
     - toml
     - Vorteil >=3.0.6
