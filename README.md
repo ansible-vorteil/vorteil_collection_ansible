@@ -40,6 +40,8 @@ Example Playbook
       msg: '{{ apps }}'
 ```
 
+**More examples can found [here](playbooks/files)**
+
 License
 -------
 

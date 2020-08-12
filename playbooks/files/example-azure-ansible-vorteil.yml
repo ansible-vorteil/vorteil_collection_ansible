@@ -1,0 +1,75 @@
+- name: provision a Vorteil application to Azure
+  hosts: localhost
+
+  vars:
+    # The folllowing variables identify to which repo to connect. In this case, we will be using the public repository
+    var_repo_address: "packages.vorteil.io"
+    var_repo_proto: "https"
+    var_bucket: "vorteil"
+    var_app: "cockroachdb"
+
+    # Next set of variables identify where on the localhost to save the built package - if it is built from a remote repository
+    var_local_repo_address: "localhost"
+    var_local_repo_port: "7472"
+    var_local_repo_proto: "http"
+    var_local_bucket: "vorteil"
+    var_local_app: "cockroachdb"
+    var_local_save_location: "/tmp/cockroachdb-ansible-azure"
+    var_local_provisioner: "azure-vorteil-demo"
+
+    # The next set of variables are used for the Google Cloud connectivity
+    var_provisioned_image_name: "{{var_app}}-image"
+    var_azure_machine_name: "cockroachdb-prod-azure"
+    var_azure_resource_group: "vorteil-demo"
+    var_azure_username: "<removed>"
+    var_azure_password: "<removed>"
+
+
+  tasks:
+    - name: get configured provisioners
+      ansible_vorteil.cloud.vorteil_list_provisioners:
+        repo_proto: '{{ var_local_repo_proto }}'
+        repo_address: '{{ var_local_repo_address }}'
+        repo_port: '{{ var_local_repo_port }}'
+      register: "provisioners"
+
+    - name: pull vorteil app package from remote repository
+      ansible_vorteil.cloud.vorteil_pull_app_package:
+        #repo_key: "{{ var_repo_key }}"
+        repo_proto: '{{ var_repo_proto }}'
+        repo_address: '{{ var_repo_address }}'
+        repo_bucket: '{{ var_bucket }}'
+        repo_app: "{{ var_app }}"
+        package_save_location: "{{ var_local_save_location }}"
+      register: pullResponse
+
+    - name: Provision app package
+      ansible_vorteil.cloud.vorteil_provision_injection_uri_from_germ:
+        repo_proto: '{{ var_local_repo_proto }}'
+        repo_address: '{{ var_local_repo_address }}'
+        repo_port: '{{ var_local_repo_port }}'
+        vorteil_germ: '{{ pullResponse.response.package_save_location }}'
+        repo_provisioner: "{{ var_local_provisioner }}"
+        repo_image_name: '{{ var_provisioned_image_name }}'
+        skip_injection: true
+        wait_until_finished: true
+      register: geturiprovisionresponse
+
+    - name: dump response
+      debug:
+        msg: '{{geturiprovisionresponse}}'
+
+    - name: Create a VM with a custom image
+      azure_rm_virtualmachine:
+        resource_group: '{{ var_azure_resource_group }}'
+        name: '{{ var_azure_machine_name }}'
+        vm_size: Standard_B1ls
+        admin_username: '{{ var_azure_username }}'
+        admin_password: '{{ var_azure_password }}'
+        image: '{{ var_provisioned_image_name }}'
+        location: "australiaeast"
+      register: instance
+
+    - name: dump response
+      debug:
+        msg: '{{ instance }}'

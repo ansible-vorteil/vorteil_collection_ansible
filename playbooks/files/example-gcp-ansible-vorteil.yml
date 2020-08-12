@@ -1,0 +1,96 @@
+- name: provision a Vorteil application to Google Cloud Platform
+  hosts: localhost
+
+  vars:
+    # The folllowing variables identify to which repo to connect. In this case, we will be using the public repository
+    var_repo_address: "packages.vorteil.io"
+    var_repo_proto: "https"
+    var_bucket: "vorteil"
+    var_app: "cockroachdb"
+
+    # Next set of variables identify where on the localhost to save the built package - if it is built from a remote repository
+    var_local_repo_address: "localhost"
+    var_local_repo_port: "7472"
+    var_local_repo_proto: "http"
+    var_local_bucket: "vorteil"
+    var_local_app: "cockroachdb"
+    var_local_save_location: "/tmp/cockroachdb-ansible-gcp"
+    var_local_provisioner: "gcp-vorteil-demo"
+
+    # The next set of variables are used for the Google Cloud connectivity
+    var_provisioned_image_name: "{{var_app}}-image"
+    gcp_project: hybrid-robot-160300
+    gcp_cred_kind: serviceaccount
+    gcp_cred_file: "/home/Desktop/keys/vorteil-demo-gcp.json"
+    zone: "australia-southeast1-b"
+    gcp_machine_type: "f1-micro"
+    gcp_machine_name: "cockroachdb-production-gcp"
+    gcp_network_name: "default"
+
+  tasks:
+    - name: get configured provisioners
+      ansible_vorteil.cloud.vorteil_list_provisioners:
+        repo_proto: '{{ var_local_repo_proto }}'
+        repo_address: '{{ var_local_repo_address }}'
+        repo_port: '{{ var_local_repo_port }}'
+      register: "provisioners"
+
+    - name: pull vorteil app package from remote repository
+      ansible_vorteil.cloud.vorteil_pull_app_package:
+        #repo_key: "{{ var_repo_key }}"
+        repo_proto: '{{ var_repo_proto }}'
+        repo_address: '{{ var_repo_address }}'
+        repo_bucket: '{{ var_bucket }}'
+        repo_app: "{{ var_app }}"
+        package_save_location: "{{ var_local_save_location }}"
+      register: pullResponse
+
+    - name: Provision app package
+      ansible_vorteil.cloud.vorteil_provision_injection_uri_from_germ:
+        repo_proto: '{{ var_local_repo_proto }}'
+        repo_address: '{{ var_local_repo_address }}'
+        repo_port: '{{ var_local_repo_port }}'
+        vorteil_germ: '{{ pullResponse.response.package_save_location }}'
+        repo_provisioner: "{{ var_local_provisioner }}"
+        repo_image_name: '{{ var_provisioned_image_name }}'
+        skip_injection: true
+        wait_until_finished: true
+      register: geturiprovisionresponse
+
+    - name: dump response
+      debug:
+        msg: '{{geturiprovisionresponse}}'
+
+    - name: create a disk
+      gcp_compute_disk:
+        name: '{{gcp_machine_name}}-disk'
+        source_image: "global/images/{{var_provisioned_image_name}}"
+        zone: "{{ zone }}"
+        project: "{{ gcp_project }}"
+        auth_kind: "{{ gcp_cred_kind }}"
+        service_account_file: "{{ gcp_cred_file }}"
+        state: present
+      register: disk
+
+    - name: create an instance
+      gcp_compute_instance:
+        state: present
+        name: '{{ gcp_machine_name }}'
+        machine_type: '{{ gcp_machine_type }}'
+        disks:
+          - auto_delete: true
+            boot: true
+            source: '{{ disk }}'
+        network_interfaces:
+          - access_configs:
+              - name: 'External NAT'
+                type: 'ONE_TO_ONE_NAT'
+        zone: '{{ zone }}'
+        project: "{{ gcp_project }}"
+        auth_kind: "{{ gcp_cred_kind }}"
+        service_account_file: "{{ gcp_cred_file }}"
+      register: instance
+
+    - name: dump response
+      debug:
+        msg: '{{ instance }}'
